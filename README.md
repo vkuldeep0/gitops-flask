@@ -1,1 +1,1 @@
-#I deployed a Flask application on Kubernetes using GitOps principles. I built a Helm chart for the application, set up ArgoCD for continuous deployment, and connected it to a GitHub repository. I configured a GitHub Actions pipeline that builds the Docker image, pushes it to DockerHub, updates the Helm chart, and commits the changes. ArgoCD auto-sync deploys each new version to the cluster. This demonstrates end-to-end automation with Kubernetes, Helm, ArgoCD, and CI/CD.
+# Simple Flask App For Testing Purposes
