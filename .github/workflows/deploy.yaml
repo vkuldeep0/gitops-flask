@@ -18,7 +18,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Image
-      run: docker build -t vkuldeep0/flask-app:latest
+      run: docker build -t vkuldeep0/flask-app:latest .
 
     - name: Push Image
       run: docker push vkuldeep0/flask-app:latest
