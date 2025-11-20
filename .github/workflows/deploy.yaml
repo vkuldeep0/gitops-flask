@@ -1,0 +1,36 @@
+name: Build and Push Image
+
+on:
+  push:
+    branch: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Login to Dockerhub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secret.DOCKER_USERNAME }}
+        password: ${{ secret.DOCKER_PASSWORD }}
+
+    - name: Build Image
+      run: docker build -t vkuldeep0/flask-app:latest
+
+    - name: Push Image
+      run: docker push vkuldeep0/flask-app:latest
+
+    - name: Update Helm Values
+      run: |
+        sed -i 's/tag:.*/tag: "latest"/' helm/flask-app/values.yaml
+
+    - name: Commit and Push Updated Chart
+      run : |
+        git config --global user.email "kv773708@gmail.com"
+        git config --global user.name "vkuldeep0"
+        git add .
+        git commit -m "Update image version"
+        git push
